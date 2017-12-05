@@ -2,7 +2,7 @@
 
 
 // TODO: 砲台の位置を画面左に、ターゲットの位置を画面右に移動させる。(A)
-// TODO: 雲の位置を左から右に動かす。見えなくなったら左端に戻す。(B)
+// TODO: 雲の位置を左から右に動かす。見えなくなったら左端に戻す。(B) HW16A221 吉田和成
 // TODO: 砲台を青い壁に沿って上下に動かす。(C)
 // TODO: 弾のスピードを速くし、弾が画面右端を通り越したら再度発射可能にする。(D)
 // TODO: スコアのサイズを大きくする。(E)
@@ -17,7 +17,6 @@ Vector2 bulletPos;      //!< 弾の位置
 Rect    targetRect;     //!< ターゲットの矩形
 int     score;          //!< スコア
 
-
 // ゲーム開始時に呼ばれる関数です。
 void Start()
 {
@@ -31,6 +30,12 @@ void Start()
 // 1/60秒ごとに呼ばれる関数です。モデルの更新と画面の描画を行います。
 void Update()
 {
+    // 雲の移動
+    if (cloudPos.x < 310) {
+        cloudPos.x += 50 * Time::deltaTime;
+    } else {
+        cloudPos.x = -550;
+    }
     // 弾の発射
     if (bulletPos.x <= -999 && Input::GetKeyDown(KeyMask::Space)) {
         bulletPos = cannonPos + Vector2(50, 10);
