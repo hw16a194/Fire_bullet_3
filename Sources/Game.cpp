@@ -2,8 +2,8 @@
 
 
 // TODO: 砲台の位置を画面左に、ターゲットの位置を画面右に移動させる。(A)
-// TODO: 雲の位置を左から右に動かす。見えなくなったら左端に戻す。(B)
-// TODO: 砲台を青い壁に沿って上下に動かす。(C)
+// TODO: 雲の位置を左から右に動かす。見えなくなったら左端に戻す。(B) HW16A190　水本浩暉
+// TODO: 砲台を青い壁に沿って上下に動かす。(C)　HW16A190　水本浩暉
 // TODO: 弾のスピードを速くし、弾が画面右端を通り越したら再度発射可能にする。(D)
 // TODO: スコアのサイズを大きくする。(E)
 // TODO: スコアを100点ずつ加算するようにし、5桁の表示に変える。(F)
@@ -16,6 +16,7 @@ Vector2 cannonPos;      //!< 砲台の位置
 Vector2 bulletPos;      //!< 弾の位置
 Rect    targetRect;     //!< ターゲットの矩形
 int     score;          //!< スコア
+int     cannonMove = 0;       //砲台　制御
 
 
 // ゲーム開始時に呼ばれる関数です。
@@ -46,6 +47,28 @@ void Update()
             score += 1;         // スコアの加算
             bulletPos.x = -999; // 弾を発射可能な状態に戻す
         }
+        
+    }
+    
+    //雲の移動
+    if (cloudPos.x < 310) {
+        cloudPos.x += 30 * Time::deltaTime;
+    }else{
+        cloudPos.x =-540;
+    }
+    
+    //砲台の移動
+    if(cannonPos.y < -65&&(cannonMove==0||cannonMove==2)){
+        cannonMove=0;
+    }else if(cannonPos.y>-85&&(cannonMove==0||cannonMove==2)){
+       cannonMove=1;
+    }else if(cannonPos.y<-145){
+        cannonMove=2;
+    }
+    if (cannonMove==0||cannonMove==2){
+        cannonPos.y += 30 * Time::deltaTime;
+    }else{
+        cannonPos.y -= 30 * Time::deltaTime;
     }
 
     // 背景の描画
