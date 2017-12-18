@@ -12,7 +12,7 @@
 >>>>>>> 47db9f659107dfe2081231a0814da25ba51a5976
 // TODO: 弾のスピードを速くし、弾が画面右端を通り越したら再度発射可能にする。(D)
 // TODO: スコアのサイズを大きくする。(E)
-// TODO: スコアを100点ずつ加算するようにし、5桁の表示に変える。(F)
+// TODO: スコアを100点ずつ加算するようにし、5桁の表示に変える。(F) HW16A221 吉田和成
 // TODO: PlayBGM()関数を使って、BGMを再生する。(G)
 // TODO: PlaySE()関数を使って、弾の発射時とターゲットに当たった時にSEを再生する。(H) HW16A194 峯岡侑史
 
@@ -55,7 +55,7 @@ void Update()
         // ターゲットと弾の当たり判定
         Rect bulletRect(bulletPos, Vector2(32, 20));
         if (targetRect.Overlaps(bulletRect)) {
-            score += 1;         // スコアの加算
+            score += 100;         // スコアの加算
             bulletPos.x = -999; // 弾を発射可能な状態に戻す
             PlaySound("se_maoudamashii_system20.mp3");
         }
@@ -104,7 +104,7 @@ void Update()
 
     // スコアの描画
     SetFont("nicoca_v1.ttf", 20.0f);
-    DrawText(FormatString("%02d", score), Vector2(-319, 199), Color::black);
-    DrawText(FormatString("%02d", score), Vector2(-320, 200), Color::white);
+    DrawText(FormatString("%05d", score), Vector2(-319, 199), Color::black);
+    DrawText(FormatString("%05d", score), Vector2(-320, 200), Color::white);
 }
 
