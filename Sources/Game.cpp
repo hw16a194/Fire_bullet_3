@@ -1,14 +1,20 @@
 #include "Game.hpp"
 
 
+<<<<<<< HEAD
 // TODO: 砲台の位置を画面左に、ターゲットの位置を画面右に移動させる。(A)
 // TODO: 雲の位置を左から右に動かす。見えなくなったら左端に戻す。(B) HW16A190　水本浩暉
 // TODO: 砲台を青い壁に沿って上下に動かす。(C)　HW16A190　水本浩暉
+=======
+// TODO: 砲台の位置を画面左に、ターゲットの位置を画面右に移動させる。(A) HW16A221 吉田和成
+// TODO: 雲の位置を左から右に動かす。見えなくなったら左端に戻す。(B) HW16A221 吉田和成
+// TODO: 砲台を青い壁に沿って上下に動かす。(C)
+>>>>>>> 47db9f659107dfe2081231a0814da25ba51a5976
 // TODO: 弾のスピードを速くし、弾が画面右端を通り越したら再度発射可能にする。(D)
 // TODO: スコアのサイズを大きくする。(E)
 // TODO: スコアを100点ずつ加算するようにし、5桁の表示に変える。(F)
 // TODO: PlayBGM()関数を使って、BGMを再生する。(G)
-// TODO: PlaySE()関数を使って、弾の発射時とターゲットに当たった時にSEを再生する。(H)
+// TODO: PlaySE()関数を使って、弾の発射時とターゲットに当たった時にSEを再生する。(H) HW16A194 峯岡侑史
 
 
 Vector2 cloudPos;       //!< 雲の位置
@@ -18,13 +24,12 @@ Rect    targetRect;     //!< ターゲットの矩形
 int     score;          //!< スコア
 int     cannonMove = 0;       //砲台　制御
 
-
 // ゲーム開始時に呼ばれる関数です。
 void Start()
 {
     cloudPos = Vector2(-320, 100);
-    cannonPos = Vector2(-80, -150);
-    targetRect = Rect(80, -140, 40, 40);
+    cannonPos = Vector2(-315, -150);
+    targetRect = Rect(280, -140, 40, 40);
     bulletPos.x = -999;
     score = 0;
 }
@@ -32,6 +37,12 @@ void Start()
 // 1/60秒ごとに呼ばれる関数です。モデルの更新と画面の描画を行います。
 void Update()
 {
+    // 雲の移動
+    if (cloudPos.x < 310) {
+        cloudPos.x += 50 * Time::deltaTime;
+    } else {
+        cloudPos.x = -550;
+    }
     // 弾の発射
     if (bulletPos.x <= -999 && Input::GetKeyDown(KeyMask::Space)) {
         bulletPos = cannonPos + Vector2(50, 10);
@@ -46,6 +57,7 @@ void Update()
         if (targetRect.Overlaps(bulletRect)) {
             score += 1;         // スコアの加算
             bulletPos.x = -999; // 弾を発射可能な状態に戻す
+            PlaySound("se_maoudamashii_system20.mp3");
         }
         
     }
