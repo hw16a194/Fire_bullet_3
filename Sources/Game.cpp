@@ -9,11 +9,17 @@
 // TODO: 砲台の位置を画面左に、ターゲットの位置を画面右に移動させる。(A) HW16A221 吉田和成
 // TODO: 雲の位置を左から右に動かす。見えなくなったら左端に戻す。(B) HW16A221 吉田和成
 // TODO: 砲台を青い壁に沿って上下に動かす。(C)
+<<<<<<< HEAD
 >>>>>>> 47db9f659107dfe2081231a0814da25ba51a5976
 // TODO: 弾のスピードを速くし、弾が画面右端を通り越したら再度発射可能にする。(D)
 // TODO: スコアのサイズを大きくする。(E)
 <<<<<<< HEAD
 // TODO: スコアを100点ずつ加算するようにし、5桁の表示に変える。(F) HW16A221 吉田和成
+=======
+// TODO: 弾のスピードを速くし、弾が画面右端を通り越したら再度発射可能にする。(D) HW16A178 前田
+// TODO: スコアのサイズを大きくする。(E)　HW16A178 前田
+// TODO: スコアを100点ずつ加算するようにし、5桁の表示に変える。(F)
+>>>>>>> 1ad2407f33e8ac8db7e5d8128f355dfd21974188
 // TODO: PlayBGM()関数を使って、BGMを再生する。(G)
 // TODO: PlaySE()関数を使って、弾の発射時とターゲットに当たった時にSEを再生する。(H) HW16A194 峯岡侑史
 =======
@@ -58,7 +64,7 @@ void Update()
 
     // 弾の移動
     if (bulletPos.x > -999) {
-        bulletPos.x += 10 * Time::deltaTime;
+        bulletPos.x += 250 * Time::deltaTime;
 
         // ターゲットと弾の当たり判定
         Rect bulletRect(bulletPos, Vector2(32, 20));
@@ -67,6 +73,7 @@ void Update()
             bulletPos.x = -999; // 弾を発射可能な状態に戻す
             PlaySound("se_maoudamashii_explosion06.mp3");
         }
+<<<<<<< HEAD
         
     }
     
@@ -89,6 +96,11 @@ void Update()
         cannonPos.y += 30 * Time::deltaTime;
     }else{
         cannonPos.y -= 30 * Time::deltaTime;
+=======
+        if (bulletPos.x>310) {
+            bulletPos.x = -999;
+        }
+>>>>>>> 1ad2407f33e8ac8db7e5d8128f355dfd21974188
     }
 
     // 背景の描画
@@ -111,8 +123,14 @@ void Update()
     FillRect(targetRect, Color::red);
 
     // スコアの描画
+<<<<<<< HEAD
     SetFont("nicoca_v1.ttf", 20.0f);
     DrawText(FormatString("%05d", score), Vector2(-319, 199), Color::black);
     DrawText(FormatString("%05d", score), Vector2(-320, 200), Color::white);
+=======
+    SetFont("nicoca_v1.ttf", 20.0f*2.5);
+    DrawText(FormatString("%02d", score), Vector2(-319, 199), Color::black);
+    DrawText(FormatString("%02d", score), Vector2(-320, 200), Color::white);
+>>>>>>> 1ad2407f33e8ac8db7e5d8128f355dfd21974188
 }
 
